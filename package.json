@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon moduleProject.js"
+    "start": "nodemon app.js"
   },
   "author": "Samarajya Shrestha",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
-    "dayjs": "^1.11.11"
+    "dayjs": "^1.11.11",
+    "express": "^4.19.2"
   }
 }
