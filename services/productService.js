@@ -1,41 +1,48 @@
-let products = [];
+import Product from "../model/Product.js";
 
-const getAllProducts = () => {
-  return products;
+const getAllProducts = async () => {
+  try {
+    return await Product.find();
+  } catch (error) {
+    throw error;
+  }
 };
 
-const getProductById = (id) => {
-  return products.find((product) => product.id === parseInt(id));
+const getOneProduct = async (data) => {
+  try {
+    return await Product.find(data);
+  } catch (error) {
+    throw error;
+  }
 };
 
-const createProduct = (data) => {
-  const newProduct = {
-    id: products.length + 1,
-    name: data.name,
-    price: data.price,
-  };
-
-  products.push(newProduct);
-
-  return newProduct;
+const createProduct = async (data) => {
+  try {
+    return await Product.create(data);
+  } catch (error) {
+    throw error;
+  }
 };
 
-const updateProduct = (id, data) => {
-  const product = products.find((product) => product.id === parseInt(id));
-
-  product.name = data.name;
-  product.price = data.price;
-
-  return product;
+const updateProduct = async (id, data) => {
+  try {
+    return await Product.findByIdAndUpdate(id, data);
+  } catch (error) {
+    throw error;
+  }
 };
 
-const deleteProduct = (id) => {
-  products = products.filter((product) => product.id != parseInt(id));
+const deleteProduct = async (id) => {
+  try {
+    return await Product.findOneAndDelete(id);
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default {
   getAllProducts,
-  getProductById,
+  getOneProduct,
   createProduct,
   updateProduct,
   deleteProduct,

@@ -1,14 +1,15 @@
 import express from "express";
 
 import productController from "../controllers/productController.js";
+import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 
 router.get("/", productController.getAllProducts);
 
-// router.get("/:id", productController.getProductById);
+router.get("/one", productController.getOneProduct);
 
-router.post("/", productController.createProduct);
+router.post("/", auth, productController.createProduct);
 
 // router.put("/:id", productController.updateProduct);
 
@@ -16,7 +17,6 @@ router.post("/", productController.createProduct);
 
 router
   .route("/:id")
-  .get(productController.getProductById)
   .put(productController.updateProduct)
   .delete(productController.deleteProduct);
 

@@ -1,48 +1,66 @@
 import productService from "../services/productService.js";
 
-const getAllProducts = (req, res) => {
-  const products = productService.getAllProducts();
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await productService.getAllProducts();
 
-  res.json(products);
+    res.json(products);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-const getProductById = (req, res) => {
-  const id = req.params.id;
+const getOneProduct = async (req, res) => {
+  try {
+    const data = req.body;
 
-  const product = productService.getProductById(id);
+    const product = await productService.getOneProduct(data);
 
-  if (!product) return res.status(404).send("Product not found");
+    if (!product) return res.status(404).send("Product not found");
 
-  res.json(product);
+    res.json(product);
+  } catch (error) {}
 };
 
-const createProduct = (req, res) => {
-  const product = productService.createProduct(req.body);
+const createProduct = async (req, res) => {
+  try {
+    const product = await productService.createProduct(req.body);
 
-  res.status(201).json(product);
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-const updateProduct = (req, res) => {
-  const id = req.params.id;
+const updateProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
 
-  const product = productService.updateProduct(id, req.body);
+    const product = await productService.updateProduct(id, req.body);
 
-  if (!product) return res.status(404).send("Product not found");
+    if (!product) return res.status(404).send("Product not found");
 
-  res.json(product);
+    res.json(product);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-const deleteProduct = (req, res) => {
-  const id = req.params.id;
+const deleteProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
 
-  productService.deleteProduct(id);
+    productService.deleteProduct(id);
 
-  res.send(`Product deleted: ${id}`);
+    res.send(`Product deleted: ${id}`);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 export default {
   getAllProducts,
-  getProductById,
+  getOneProduct,
   createProduct,
   updateProduct,
   deleteProduct,
