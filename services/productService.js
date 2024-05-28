@@ -1,8 +1,14 @@
 import Product from "../model/Product.js";
 
-const getAllProducts = async () => {
+const getAllProducts = async (data) => {
+  const limit = data?.limit ?? 10;
+  const page = data?.page ?? 1;
+  const offset = (page - 1) * limit;
+  const sort = data?.sort ? JSON.parse(data.sort) : {};
+  const filters = data?.filters ? JSON.parse(data.filters) : {};
+
   try {
-    return await Product.find();
+    return await Product.find(filters).sort(sort).limit(limit).skip(offset);
   } catch (error) {
     throw error;
   }

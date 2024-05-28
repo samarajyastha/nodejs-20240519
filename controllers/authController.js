@@ -7,8 +7,10 @@ const loginPage = (req, res) => {
 };
 
 const homePage = async (req, res) => {
+  const params = req.query;
+
   try {
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProducts(params);
 
     res.render("home", { products, user: "John" });
   } catch (error) {
