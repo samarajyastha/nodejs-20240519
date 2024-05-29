@@ -23,6 +23,7 @@ const registerUser = async (data) => {
       id: createdUser._id,
       email: createdUser.email,
       name: createdUser.name,
+      roles: createdUser.roles,
       createdAt: createdUser.createdAt,
     };
   } catch (error) {
