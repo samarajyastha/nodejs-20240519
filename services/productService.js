@@ -1,4 +1,5 @@
 import Product from "../model/Product.js";
+import customDateFormatter from "../utils/dateFormat.js";
 
 const getCategories = async () => {
   try {
@@ -16,7 +17,25 @@ const getAllProducts = async (data) => {
   const filters = data?.filters ? JSON.parse(data.filters) : {};
 
   try {
-    return await Product.find(filters).sort(sort).limit(limit).skip(offset);
+    const products = await Product.find(filters)
+      .sort(sort)
+      .limit(limit)
+      .skip(offset);
+
+    return products.map((product) => {
+      const formattedCreatedDate = customDateFormatter(
+        product.createdAt,
+        "MMM dd, yyyy"
+      );
+
+      return {
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        brand: product.brand,
+        createdAt: formattedCreatedDate,
+      };
+    });
   } catch (error) {
     throw error;
   }
