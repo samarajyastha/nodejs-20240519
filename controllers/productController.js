@@ -12,7 +12,7 @@ const getCategories = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProducts(req.params);
 
     res.json(products);
   } catch (error) {
