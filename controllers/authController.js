@@ -49,6 +49,4 @@ export default {
   logoutUser,
   registerUser,
   loginUser,
-  loginPage,
-  homePage,
 };
