@@ -25,9 +25,7 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie("token", token, { httpOnly: true });
-
-    res.json(user);
+    res.json({ token });
   } catch (error) {
     res.status(500).send(error.message);
   }

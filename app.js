@@ -1,7 +1,8 @@
 import bodyParser from "body-parser";
-import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
 
 import authRoutes from "./routes/auth.js";
 import connectDB from "./database.js";
@@ -18,6 +19,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
