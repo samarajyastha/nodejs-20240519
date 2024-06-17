@@ -42,6 +42,7 @@ const loginUser = async (data) => {
     if (!isMatch) throw new Error("Email or password doesn't match.");
 
     return {
+      id: existingUser._id,
       name: existingUser.name,
       email: existingUser.email,
       roles: existingUser.roles,
