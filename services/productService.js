@@ -29,6 +29,7 @@ const getAllProducts = async (data) => {
       );
 
       return {
+        id: product._id,
         name: product.name,
         price: product.price,
         category: product.category,
