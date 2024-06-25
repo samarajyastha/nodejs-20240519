@@ -47,7 +47,6 @@ const getOneProduct = async (id) => {
     return await Product.findById(id);
   } catch (error) {
     throw error;
-    s;
   }
 };
 

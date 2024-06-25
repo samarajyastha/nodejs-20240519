@@ -28,7 +28,14 @@ const getOneProduct = async (req, res) => {
 
     if (!product) return res.status(404).send("Product not found");
 
-    res.json(product);
+    res.json({
+      id: product._id,
+      name: product.name,
+      brand: product.brand,
+      category: product.category,
+      price: product.price,
+      createdAt: product.createdAt,
+    });
   } catch (error) {}
 };
 
@@ -62,9 +69,9 @@ const deleteProduct = async (req, res) => {
   try {
     const id = req.params.id;
 
-    await productService.deleteProduct(id);
+    const deletedProduct = await productService.deleteProduct(id);
 
-    res.send(`Product deleted: ${id}`);
+    res.send(deletedProduct);
   } catch (error) {
     res.status(500).send(error.message);
   }
