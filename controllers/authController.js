@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
 
     res.json(user);
   } catch (error) {
@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user);
 
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
 
     res.json(user);
   } catch (error) {
