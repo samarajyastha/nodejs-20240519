@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
 
     res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
 
-    res.json(user);
+    res.json({ ...user, token });
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -31,7 +31,7 @@ const loginUser = async (req, res) => {
 
     res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
 
-    res.json(user);
+    res.json({ ...user, token });
   } catch (error) {
     res.status(500).send(error.message);
   }
