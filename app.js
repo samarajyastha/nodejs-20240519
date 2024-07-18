@@ -15,6 +15,10 @@ dotenv.config();
 
 connectDB();
 
+const appUrls = process.env.APP_URLS;
+
+const appUrlList = appUrls.split(",");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
@@ -22,7 +26,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: process.env.APP_URL,
+    origin: appUrlList,
     credentials: true,
   })
 );
