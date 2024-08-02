@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: appUrlList,
+    origin: "*",
     credentials: true,
   })
 );
