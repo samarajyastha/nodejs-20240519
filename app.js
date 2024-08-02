@@ -24,12 +24,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) return callback(null, true);
+
+    return callback(null, true);
+  },
+  credentials: true, // Allow cookies
+};
+
+app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: "*",
+//     credentials: true,
+//   })
+// );
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
