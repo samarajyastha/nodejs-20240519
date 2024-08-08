@@ -16,8 +16,13 @@ const getAllProducts = async (data) => {
   const sort = data?.sort ? JSON.parse(data.sort) : {};
   const filters = data?.filters ? JSON.parse(data.filters) : {};
 
+  const searchQuery = Object.entries(filters).reduce(
+    (acc, [key, value]) => ({ ...acc, [key]: new RegExp(value, "i") }),
+    {}
+  );
+
   try {
-    const products = await Product.find(filters)
+    const products = await Product.find(searchQuery)
       .sort(sort)
       .limit(limit)
       .skip(offset);
