@@ -3,7 +3,22 @@ import customDateFormatter from "../utils/dateFormat.js";
 
 const getCategories = async () => {
   try {
-    return await Product.distinct("category");
+    const categories = await Product.aggregate([
+      {
+        $group: {
+          _id: { $toLower: "$category" },
+          originalCategory: { $first: "$category" },
+        },
+      },
+      {
+        $project: {
+          _id: 0, // Exclude the _id field
+          category: "$originalCategory", // Project the original category value
+        },
+      },
+    ]);
+
+    return categories.map((item) => item.category);
   } catch (error) {
     throw error;
   }
