@@ -10,6 +10,8 @@ router.get("/", productController.getAllProducts);
 
 router.get("/categories", productController.getCategories);
 
+router.get("/total", productController.getTotal);
+
 router.get("/:id", productController.getOneProduct);
 
 router.post("/", auth, productController.createProduct);

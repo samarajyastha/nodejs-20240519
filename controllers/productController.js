@@ -39,6 +39,14 @@ const getOneProduct = async (req, res) => {
   } catch (error) {}
 };
 
+const getTotal = async (req, res) => {
+  const total = await productService.getTotal();
+
+  res.json({
+    total,
+  });
+};
+
 const createProduct = async (req, res) => {
   const userId = req.user.id;
 
@@ -81,6 +89,7 @@ export default {
   getCategories,
   getAllProducts,
   getOneProduct,
+  getTotal,
   createProduct,
   updateProduct,
   deleteProduct,

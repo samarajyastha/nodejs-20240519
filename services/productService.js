@@ -70,6 +70,14 @@ const getOneProduct = async (id) => {
   }
 };
 
+const getTotal = async ()=>{
+  try {
+    return await Product.countDocuments()
+  } catch (error) {
+    throw error;
+  }
+}
+
 const createProduct = async (data, userId) => {
   try {
     return await Product.create({
@@ -105,6 +113,7 @@ export default {
   getCategories,
   getAllProducts,
   getOneProduct,
+  getTotal,
   createProduct,
   updateProduct,
   deleteProduct,
